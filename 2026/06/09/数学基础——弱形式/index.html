@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="Leaf">
+
+
+
+
+
+<title>数学基础——弱形式 | Leaf&#39;s Blog</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+            <!-- MathJax配置，可通过单美元符号书写行内公式等 -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    "HTML-CSS": {
+        preferredFont: "TeX",
+        availableFonts: ["STIX","TeX"],
+        linebreaks: { automatic:true },
+        EqnChunk: (MathJax.Hub.Browser.isMobile ? 10 : 50)
+    },
+    tex2jax: {
+        inlineMath: [ ["$", "$"], ["\\(","\\)"] ],
+        processEscapes: true,
+        ignoreClass: "tex2jax_ignore|dno",
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    },
+    messageStyle: "none"
+    });
+</script>
+<!-- 给MathJax元素添加has-jax class -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<!-- 通过连接CDN加载MathJax的js代码 -->
+<script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+        
+    
+
+
+<meta name="generator" content="Hexo 8.1.2"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">Leaf&#39;s Blog</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">Leaf&#39;s Blog</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">数学基础——弱形式</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">Leaf</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">2026 06 09&nbsp;&nbsp;20:00:50</a>
+                        </span>
+                    
+                    
+                        <span class="post-category">
+                    Category:
+                            
+                                <a href="/categories/%E6%9C%89%E9%99%90%E5%85%83%E9%80%A0%E8%BD%AE%E5%AD%90/">有限元造轮子</a>
+                            
+                        </span>
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>考期前最后更一次，之后一段时间就闭关复习备考了。昨日搞定了几何，发现其实离真的实现有限元还差得远，首先需要恶补一些数学知识。这么看来今天这篇可能也写得不是很完善，有待后续进一步补充了。</p>
+<p>知乎上不少讲弱形式的。B站上也看到有搬运一个油管博主<em>Dr.Simulate</em>讲弱形式的，讲得蛮透彻的。说来也巧的是，我这学期昏头转向地选了个数学学院的《现代偏微分方程》当跨专业选修课，给我听得云里雾里，直到看有限元的相关文章和书籍时，才发现弱形式这个东西正是PDE课上重点讲的，虽然我没太听懂那些泛函分析和函数空间，但是对弱形式这个词总还是有点印象，也算是缘分了。</p>
+<p>最后，之前两篇算是个铺垫，从这篇开始得严肃起来。</p>
+<h2 id="为什么要用弱形式"><a href="#为什么要用弱形式" class="headerlink" title="为什么要用弱形式"></a>为什么要用弱形式</h2><p>有限元的最终目的是解微分方程，得到解。传统意义下的“解析解”其实都是“强形式”，它们是逐点的，即要求在每一点上都成立某些性质（例如可导），这实际上对函数的要求是比较高的，也导致很多情况下写不出这样的形式。现实世界中的情况往往也没有那么理想，材料可以有尖角，作用力可以突变，激波前后压力也是突变，即函数没有那么“平滑”，甚至有些写不成无穷个点的形式。</p>
+<p>大一的ODE课程里也提到过：只有很小一部分常微分方程能写出解析解。更别说偏微分方程了。而采用弱形式的目的就是降低解函数的门槛，允许更多性质“不那么好”的函数也能成为解。</p>
+<p>深究弱形式其实还能刨根问底，计划未来有空再补上，今天先专注于弱形式本身。</p>
+<h2 id="弱形式的定义"><a href="#弱形式的定义" class="headerlink" title="弱形式的定义"></a>弱形式的定义</h2><p>弱形式的核心思想就是不再关注每个点上的性质，而是关注函数在某个区间内的“总体性质”，其方式就是使用加权平均，常用来举例的就是一维泊松问题：</p>
+<p>$$<br>\begin{equation}<br>\left\{<br>    \begin{aligned}<br>        -u_{xx}(x) &amp;&#x3D; f(x) \\<br>        u(0) &amp;&#x3D; 0 \\<br>        u(1) &amp;&#x3D; 0<br>    \end{aligned}<br>\right.<br>,x\in[0,1]<br>\end{equation}<br>$$</p>
+<p>可以代表一根长度为1，两端固定的水平杆件，受到分布载荷$f(x)$的作用发生弯曲，其位移——或者说挠度——就满足该方程。</p>
+<p>按照弱形式加权平均的思想，引入一个<strong>测试函数</strong>$v(x)$，乘到式子的两端做积分。这个测试函数可以是任意的，但是性质良好。</p>
+<p>$$<br>\int^1_0-u_{xx}(x)v(x)dx &#x3D; \int^1_0f(x)v(x)dx<br>$$</p>
+<p>由分部积分法，有：</p>
+<p>$$<br>\begin{aligned}<br>\int^1_0 f(x)v(x)dx &amp;&#x3D; \int^1_0 -v(x)du_x(x) \\<br>                    &amp;&#x3D; \int^1_0 u_x(x)dv(x) - \big[v(x)u_x(x)\big]^1_0 \\<br>                    &amp;&#x3D; \int^1_0 u_x(x)v_x(x)dx - \big[v(x)u_x(x)\big]^1_0<br>\end{aligned}<br>$$</p>
+<p>积分形式看似复杂，但是却实实在在地降低了对$u(x)$的要求，从二阶可导变为一阶可导。</p>
+<p>接下来要处理边界项$\big[v(x)u_x(x)\big]^1_0$，似乎直接将$v(x)$规定为“在0和1处等于0”，就能很自然地消去边界项。但是能不能这样做呢？$v(x)$是一个我们假设的任意函数，在推导之前没有对其做任何限制。虽然在推导的过程中隐含了一些限制条件，例如分部积分过程就要求$v(x)$至少得一阶可导，但实际上要求$v(x)$在两端为0与$u(x)$的边界条件并不矛盾，二者实际上也没有什么联系。由于我们并不知道$u_x(x)$在边界上的值，如果这一项留在方程里，也是没法解的。</p>
+<p>关于测试函数$v(x)$所在的函数空间，涉及到泛函分析的内容，以后有机会再补上吧，我自己也还需要去恶补一下。</p>
+<p>总而言之，通过限制$v(x)$的边界值，我们将方程化为：</p>
+<p>$$<br>\begin{equation}<br>\int^1_0 u_x(x)v_x(x)dx &#x3D; \int^1_0 f(x)v(x)dx \label{eqn1b}<br>\end{equation}<br>$$</p>
+<p>对于计算机求解的意义就在于，数值积分比计算机求二阶导数更容易实现，但是目前这些个公式和计算机代码的举例似乎还是非常遥远。$v(x)$虽然得到了一些限制，但还是相当的自由，有无限种的可能，这对计算机是不友好的。因此需要一种方法将无限维的函数空间近似到有限维，这就是大名鼎鼎的<em>Galerkin</em>方法。</p>
+<p>但是在讨论<em>Galerkin</em>方法之前，我还是想补充一个关于弱形式和强形式关系的讨论。主要是来源于<em>Dr.Simulate</em>的视频。</p>
+<h2 id="弱形式和强形式的联系"><a href="#弱形式和强形式的联系" class="headerlink" title="弱形式和强形式的联系"></a>弱形式和强形式的联系</h2><p>之前的弱形式是由强形式推导出来的，可知强解一定是弱解，那么反过来能否成立？或者说弱形式和强形式是等价的吗？</p>
+<p>原来是打算用更一般的边界的泊松问题来说明的，更具有一般性，但是公式很多，一时也没有完全看懂，不妨直接用上面的例子，仅做不严谨的证明。</p>
+<p>假设$u$是弱解，满足$\eqref{eqn1b}$，$u,v\in H^1_0(0,1)$，且假设$u\in C^2[0,1]$，即二阶导数存在且连续。</p>
+<p>选择一类特殊的测试函数，其在$(0,1)$内部紧支撑且光滑，比如$v\in C^\infty_c(0,1)$，其自然满足$v(0)&#x3D;v(1)&#x3D;0$，代入弱形式$\eqref{eqn1b}$：</p>
+<p>$$<br>\int^1_0 u_xv_xdx &#x3D; \int^1_0 fvdx,\:\forall v\in C^\infty_c(0,1)<br>$$</p>
+<p>对左边进行分部积分，由于$v$在边界处为0，边界项消失：</p>
+<p>$$<br>\int^1_0 u_xv_xdx &#x3D; \big[u_xv\big]^1_0 - \int^1_0 u_{xx}vdx &#x3D; -\int^1_0 u_{xx}vdx<br>$$</p>
+<p>代回原式：</p>
+<p>$$<br>-\int^1_0 u_{xx}vdx &#x3D; \int^1_0 fvdx<br>$$</p>
+<p>即</p>
+<p>$$<br>\int^1_0 (-u_{xx}-f)vdx &#x3D; 0,\:\forall v\in C^\infty_c(0,1)<br>$$</p>
+<p>根据变分法基本引理，若$g&#x3D;u_{xx}-f$是连续的，且对所有紧支撑光滑函数$v$的积分都为0，则$g$在$(0,1)$内恒为0，则</p>
+<p>$$<br>-u_{xx}-f&#x3D;0, \:\forall x\in [0,1]<br>$$</p>
+<p>此即强形式的微分方程。</p>
+<p>上述是在内部成立，对于边界上的情况，由于在弱形式定义中我们要求了$x\in H^1_0[0,1]$，即包含了$u(0)&#x3D;u(1)&#x3D;0$，是已经强加在解空间上的，即在边界条件下也能恢复到强解，二者完全等价。</p>
+<p>但是在更一般的问题中，也可能存在弱解不是强解，这样的例子实际上更多一些，在强形式没有意义的时候，弱形式仍提供了合理的物理解释。</p>
+<p>例如，在上面的泊松问题中，假设</p>
+<p>$$<br>f(x)&#x3D;<br>\left\{<br>    \begin{aligned}<br>    0,&amp; \:0&lt;x&lt;0.5 \\<br>    1,&amp; \:0.5&lt;x&lt;1<br>    \end{aligned}<br>\right.<br>$$</p>
+<p>显然由于$f$在0.5处突变，导数不存在，而在弱形式中可以解出唯一弱解。</p>
+<blockquote>
+<p>有点太晚了，先写到这里，Galerkin方法可能要另开一期了，等考完再说吧。</p>
+</blockquote>
+
+        </div>
+
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/FEM/"># FEM</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2026/06/08/%E5%87%A0%E4%BD%95%E7%BB%93%E6%9E%84%E4%B8%8E%E7%BD%91%E6%A0%BC%E7%94%9F%E6%88%90/">几何结构与网格生成</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© Leaf | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
